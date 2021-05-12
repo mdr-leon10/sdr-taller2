@@ -16,13 +16,13 @@ const useStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignContent: 'center',
+        margin: '0 15px',
         '&>p': {
             fontSize: '1.5rem',
         }
     },
     buttonColor: {
         color: '#3f51b5',
-        margin: '0 15px'
     }
 }));
 

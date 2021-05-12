@@ -97,4 +97,4 @@ def original():
 
 users.read_data()
 items.read_data()
-app.run()
+app.run(host='0.0.0.0')

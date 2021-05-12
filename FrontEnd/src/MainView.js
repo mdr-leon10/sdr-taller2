@@ -8,8 +8,7 @@ import axios from 'axios';
 import PaginationElement from './components/PaginationElement';
 
 const url = process.env.REACT_APP_BASE_URL;
-var startWindow = 0;
-var endWindow = startWindow + 50;
+const windowSize = 50
 const useStyles = makeStyles({
     root: {
         margin: "5%"
@@ -24,8 +23,8 @@ export default function MainView(props) {
     useEffect(() => {
         axios.get(url + '/', {
             params: {
-              min: startWindow,
-              max: endWindow,
+              min: (1-page)*windowSize,
+              max: page*windowSize,
             }
           })
         .then(response => {
@@ -33,7 +32,7 @@ export default function MainView(props) {
             const data = response.data
             setState({data})
         })
-    }, [])
+    }, [page])
 
     return (
         <div>

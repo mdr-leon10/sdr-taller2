@@ -2,18 +2,26 @@ import flask
 from flask import request, jsonify
 import Items as items
 import Users as users
-
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
+@cross_origin(origin='*')
 def home():
-	users_avg = users.get_all_users_average_score()
+	if 'min' in request.args and 'max' in request.args:
+		min = int(request.args['min'])
+		max = int(request.args['max'])
+	else:
+		return "Error: No min or max field provided. Please specify an min or max."
+	
+	users_avg = users.get_all_users_average_score_section(min, max)
 	return users_avg
 
 
-@app.route('/svd/', methods=['GET'])
+@app.route('/svd', methods=['GET'])
+@cross_origin(origin='*')
 def svd():
 	if 'id' in request.args:
 		id = request.args['id']
@@ -26,6 +34,7 @@ def svd():
 
 
 @app.route('/context', methods=['GET'])
+@cross_origin(origin='*')
 def context_week():
 	if 'id' in request.args:
 		id = request.args['id']
@@ -37,6 +46,7 @@ def context_week():
 	return jsonify(users_context_week)
 
 @app.route('/contextW', methods=['GET'])
+@cross_origin(origin='*')
 def context_weekend():
 	if 'id' in request.args:
 		id = request.args['id']
@@ -48,6 +58,7 @@ def context_weekend():
 	return jsonify(users_context_weekend)
 
 @app.route('/hybrid', methods=['GET'])
+@cross_origin(origin='*')
 def hybrid():
 	if 'id' in request.args:
 		id = request.args['id']
@@ -60,6 +71,7 @@ def hybrid():
 
 
 @app.route('/online', methods=['GET'])
+@cross_origin(origin='*')
 def online():
 	if 'id' in request.args:
 		id = request.args['id']
@@ -71,6 +83,7 @@ def online():
 	return jsonify(users_online)
 
 @app.route('/original', methods=['GET'])
+@cross_origin(origin='*')
 def original():
 	if 'id' in request.args:
 		id = request.args['id']

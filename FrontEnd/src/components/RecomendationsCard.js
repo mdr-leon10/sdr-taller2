@@ -31,7 +31,8 @@ const useStyles = makeStyles({
 
 export default function RecomendationCard(props) {
     const classes = useStyles();
-    var { cardTitle } = props
+    var { cardTitle, data } = props
+    console.log(data)
 
     return (
 
@@ -43,31 +44,11 @@ export default function RecomendationCard(props) {
                 </Card>
 
                 <Card className={classes.list}>
+                {data && data.items.map(item => (
                     <div style={{ margin: "2%"}}>
-                        <TextBox />
+                    <TextBox key={item.id_item} leftText={item.item_name} rightText={item.score}/>
                     </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-                    <div style={{ margin: "2%" }}>
-                        <TextBox />
-                    </div>
-
+                ))}
                 </Card>
 
             </Card>

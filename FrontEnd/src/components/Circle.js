@@ -15,9 +15,9 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Circle() {
+export default function Circle(props) {
     const classes = useStyles();
-    var circleText = "94%"
+    var {circleText} = props
 
     return (
 

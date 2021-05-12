@@ -18,8 +18,14 @@ def get_all_users():
 	return df['user']
 
 def get_all_users_average_score():
-	print(df[['user','apr_average']].to_json(orient="records"))
-	return df[['user','apr_average']].to_json(orient="records")
+	return df[['user','apr_average']]
+
+def get_all_users_average_score_section(start, end):
+	df_temp = get_all_users_average_score()
+	if start >= 0 and end <= df.shape[0]:
+		return df_temp[start:end].to_json(orient="records")
+	else:
+		return "out of limits"
 
 def get_users_section(start, end):
 	if start >= 0 and end <= df.shape[0]:
@@ -28,7 +34,6 @@ def get_users_section(start, end):
 		return "out of limits"
 
 def get_user_by_id(user_id):
-	print(df[df['user'] == user_id])
 	return df[df['user'] == user_id]
 
 """ Get User's recommendations lists in different models"""
@@ -36,9 +41,9 @@ def get_user_by_id(user_id):
 def get_items_in_users_svd(user_param):
 	ap = get_apr_in_users_svd(user_param)
 	items_list = {'user': user_param, 'ap': float(ap)}
-	item = {}
+	item = []
 	user = get_user_by_id(user_param)
-	user_items = user['top_10_svd'][0]
+	user_items = list(user['top_10_svd'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -48,7 +53,7 @@ def get_items_in_users_svd(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -57,9 +62,9 @@ def get_items_in_users_svd(user_param):
 def get_items_in_users_context_week(user_param):
 	ap = get_apr_in_users_context_week(user_param)
 	items_list = {'user': user_param, 'ap': float(ap)}
-	item = {}
+	item = []
 	user = get_user_by_id(user_param)
-	user_items = user['top_10_week'][0]
+	user_items = list(user['top_10_week'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -69,7 +74,7 @@ def get_items_in_users_context_week(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -78,9 +83,9 @@ def get_items_in_users_context_week(user_param):
 def get_items_in_users_context_weekend(user_param):
 	ap = get_apr_in_users_context_weekend(user_param)
 	items_list = {'user': user_param, 'ap': float(ap)}
-	item = {}
+	item = []
 	user = get_user_by_id(user_param)
-	user_items = user['top_10_weekend'][0]
+	user_items = list(user['top_10_weekend'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -90,7 +95,7 @@ def get_items_in_users_context_weekend(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -99,9 +104,9 @@ def get_items_in_users_context_weekend(user_param):
 def get_items_in_users_hyrid(user_param):
 	ap = get_apr_in_users_hyrid(user_param)
 	items_list = {'user': user_param, 'ap': float(ap)}
-	item = {}
+	item = []
 	user = get_user_by_id(user_param)
-	user_items = user['top_10_hybrid'][0]
+	user_items = list(user['top_10_hybrid'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -111,7 +116,7 @@ def get_items_in_users_hyrid(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -119,9 +124,9 @@ def get_items_in_users_hyrid(user_param):
 
 def get_items_in_users_online(user_param):
 	items_list = {'user': user_param}
-	item = {}	
+	item = []	
 	user = get_user_by_id(user_param)
-	user_items = user['top_50'][0]
+	user_items = list(user['top_50'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -131,7 +136,7 @@ def get_items_in_users_online(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -139,9 +144,9 @@ def get_items_in_users_online(user_param):
 
 def get_items_in_users_original(user_param):
 	items_list = {'user': user_param}
-	item = {}
+	item = []
 	user = get_user_by_id(user_param)
-	user_items = user['top_10_reference'][0]
+	user_items = list(user['top_10_reference'])[0]
 	if user_items != 'no_hay':
 		for i in user_items:
 			i = str(i).strip('[')
@@ -151,7 +156,7 @@ def get_items_in_users_original(user_param):
 				id_item = tuples[0]
 				score = tuples[1]
 				item_name = items.get_item_by_id(id_item)[0]
-				item[str(id_item)] = {'score': float(score), 'item_name': str(item_name)}
+				item.append({'id':str(id_item), 'score': float(score), 'item_name': str(item_name)})
 			else:
 				print('user: %s in item %s does not have score'.format(id, i))
 		items_list['items'] = item
@@ -161,7 +166,6 @@ def get_items_in_users_original(user_param):
 """ Get User's APR in different models"""
 def get_apr_in_users_svd(id):
 	user = get_user_by_id(id)
-	print('1')
 	return user['apr_svd']
 
 def get_apr_in_users_context_week(id):
@@ -183,4 +187,3 @@ def get_apr_in_users_average(id):
 
 if __name__ == '__main__':
     read_data()
-    print(get_items_in_users_original('BHhwoal42ansQj6K78hytg'))

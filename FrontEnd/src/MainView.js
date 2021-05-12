@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import NavBar from './components/NavBar'
 import UserLine from './components/UserLine';
 import axios from 'axios';
+import PaginationElement from './components/PaginationElement';
 
 const url = process.env.REACT_APP_BASE_URL;
 var startWindow = 0;
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 export default function MainView(props) {
     const classes = useStyles();
     const [state, setState] = useState({});
+    const [page, setPage] = useState(1);
     useEffect(() => {
         axios.get(url + '/', {
             params: {
@@ -36,6 +38,12 @@ export default function MainView(props) {
     return (
         <div>
             <div><NavBar /></div>
+            <PaginationElement 
+                currentPage={page}
+                disableDown={page <= 1}
+                changePageUp={() => setPage(prev => prev+1)} 
+                changePageDown={() => setPage(prev => prev-1)}
+            />
             <Card className={classes.root}>
                 <CardContent> 
                     {state.data && state.data.map(user => <UserLine key = {user.user} userName={user.user} userScore={user.apr_average}/>)}                   

@@ -23,7 +23,7 @@ export default function MainView(props) {
     useEffect(() => {
         axios.get(url + '/', {
             params: {
-              min: (1-page)*windowSize,
+              min: (page-1)*windowSize,
               max: page*windowSize,
             }
           })

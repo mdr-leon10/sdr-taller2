@@ -5,7 +5,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/:page">
           <MainView />
+        </Route>
+        <Route path="/">
+          <Redirect to="/1"/>
         </Route>
       </Switch>
     </Router>

@@ -15,6 +15,9 @@ const useStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignContent: 'center'
+    },
+    buttonColor: {
+        color: '#3f51b5',
     }
 }));
 
@@ -24,13 +27,13 @@ export const PaginationElement = (props) => {
     return (
         <div className={classes.horizontalBar}>
             <IconButton disabled={disableDown} onClick={() => changePageDown()}>
-                <NavigateBeforeIcon color={'#3f51b5'} />
+                <NavigateBeforeIcon className={classes.buttonColor} />
             </IconButton>
             <div className={classes.centerText}>
                 <Typography>{currentPage}</Typography>
             </div>
             <IconButton disabled={disableUp} onClick={() => changePageUp()}>
-                <NavigateNextIcon color={'#3f51b5'} />
+                <NavigateNextIcon className={classes.buttonColor} />
             </IconButton>
         </div>
     )

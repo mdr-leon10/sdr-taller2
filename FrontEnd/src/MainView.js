@@ -49,8 +49,14 @@ export default function MainView(props) {
                 currentPage={page}
                 disableDown={page <= 1}
                 disableUp={page >= 7}
-                changePageUp={() => history.push(`/${(page+1)}`)}
-                changePageDown={() => history.push(`/${(page-1)}`)}
+                changePageUp={() => {
+                    let newPage = page+1
+                    history.push(`/${(newPage)}`)
+                }}
+                changePageDown={() => {
+                    let newPage = page-1
+                    history.push(`/${(newPage)}`)
+                }}
             />
             <Card className={classes.root}>
                 <CardContent> 

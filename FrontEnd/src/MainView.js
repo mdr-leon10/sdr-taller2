@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import UserLine from './components/UserLine';
 import axios from 'axios';
 import PaginationElement from './components/PaginationElement';
+import { useHistory, useParams } from 'react-router';
 
 const url = process.env.REACT_APP_BASE_URL;
 const windowSize = 50

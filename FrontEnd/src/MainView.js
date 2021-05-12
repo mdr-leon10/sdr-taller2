@@ -21,6 +21,7 @@ export default function MainView(props) {
     const classes = useStyles();
     const [state, setState] = useState({});
     let { page } = useParams();
+    page = parseInt(page);
     if (page > 7) {
         page = 7;
     }

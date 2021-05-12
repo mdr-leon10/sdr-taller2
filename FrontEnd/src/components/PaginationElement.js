@@ -14,10 +14,14 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        '&>p': {
+            fontSize: '2rem',
+        }
     },
     buttonColor: {
         color: '#3f51b5',
+        padding: '0 20px'
     }
 }));
 

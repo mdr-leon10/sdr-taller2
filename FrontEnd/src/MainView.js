@@ -12,7 +12,7 @@ const url = process.env.REACT_APP_BASE_URL;
 const windowSize = 50
 const useStyles = makeStyles({
     root: {
-        margin: "5%"
+        margin: "1% 5%"
 
     }
 });
@@ -64,6 +64,19 @@ export default function MainView(props) {
                     {state.data && state.data.map(user => <UserLine key = {user.user} userName={user.user} userScore={user.apr_average}/>)}                   
                 </CardContent>
             </Card>
+            <PaginationElement 
+                currentPage={page}
+                disableDown={page <= 1}
+                disableUp={page >= 7}
+                changePageUp={() => {
+                    let newPage = page+1
+                    history.push(`/${(newPage)}`)
+                }}
+                changePageDown={() => {
+                    let newPage = page-1
+                    history.push(`/${(newPage)}`)
+                }}
+            />
         </div>
     )
 }

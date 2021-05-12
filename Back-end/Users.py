@@ -12,7 +12,7 @@ def read_data ():
 	df['top_50'] = df['top_50'].str.split(',')
 	df['top_10_reference'] = df['top_10_reference'].str.split(',')
 	df.sort_values(by=['nan_count','apr_average'], ascending=[False,False], inplace=True)
-	df.fillna('no_hay', inplace=True)
+	df.dropna(inplace=True)
 	df.to_csv('prueba.csv')
 
 def get_all_users():

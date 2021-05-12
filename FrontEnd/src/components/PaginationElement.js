@@ -8,7 +8,8 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        marginTop: '1%',
     },
     centerText: {
         display: 'flex',
@@ -16,12 +17,12 @@ const useStyles = makeStyles(() => ({
         justifyContent: 'center',
         alignContent: 'center',
         '&>p': {
-            fontSize: '2rem',
+            fontSize: '1.5rem',
         }
     },
     buttonColor: {
         color: '#3f51b5',
-        padding: '0 20px'
+        margin: '0 15px'
     }
 }));
 

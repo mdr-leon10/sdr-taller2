@@ -153,8 +153,7 @@ export default function MainRecomendationsView(props) {
 
                 <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", flexGrow: "1" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", margin: "10% 0% 0% 0%" }}>
-                        <Circle circleText={state.dataModel.ap} />
-
+                        <Circle circleText={state.dataModel && state.dataModel.ap} />
                         <div style={{ marginTop: "10%" }}>
                             {showContextButton && (
                                 <Button variant="contained" color="primary" onClick={() => setIsWeek(prev => !prev)}>

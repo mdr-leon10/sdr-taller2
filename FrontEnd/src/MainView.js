@@ -40,6 +40,7 @@ export default function MainView(props) {
             <PaginationElement 
                 currentPage={page}
                 disableDown={page <= 1}
+                disableUp={page >= 7}
                 changePageUp={() => setPage(prev => prev+1)} 
                 changePageDown={() => setPage(prev => prev-1)}
             />

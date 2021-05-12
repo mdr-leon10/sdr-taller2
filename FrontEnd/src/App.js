@@ -25,7 +25,7 @@ function App() {
         <Route path="/online/:userid">
           <RecomendationsView card1Title={"Online recomendations"} showCard2={false} card2Title={""} showContextButton={false}/>
         </Route>
-        <Route path="/">
+        <Route path="/:page">
           <MainView />
         </Route>
       </Switch>

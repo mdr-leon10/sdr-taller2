@@ -19,7 +19,14 @@ const useStyles = makeStyles({
 export default function MainView(props) {
     const classes = useStyles();
     const [state, setState] = useState({});
-    const [page, setPage] = useState(1);
+    let { page } = useParams();
+    if (page > 7) {
+        page = 7;
+    }
+    if (page < 1) {
+        page = 1
+    }
+    let history = useHistory();
     useEffect(() => {
         axios.get(url + '/', {
             params: {
@@ -41,8 +48,8 @@ export default function MainView(props) {
                 currentPage={page}
                 disableDown={page <= 1}
                 disableUp={page >= 7}
-                changePageUp={() => setPage(prev => prev+1)} 
-                changePageDown={() => setPage(prev => prev-1)}
+                changePageUp={() => history.push('/' + (page+1))}
+                changePageDown={() => history.push('/' + (page-1))}
             />
             <Card className={classes.root}>
                 <CardContent> 
